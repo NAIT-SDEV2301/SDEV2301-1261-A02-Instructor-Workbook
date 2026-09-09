@@ -1,0 +1,41 @@
+# Normalize text files automatically
+* text=auto
+
+# C# / .NET source files
+*.cs       text diff=csharp
+*.csproj   text
+*.sln      text
+*.slnx     text
+*.props    text
+*.targets  text
+
+# ASP.NET / Blazor / MAUI
+*.razor    text
+*.cshtml   text
+*.xaml     text
+*.css      text
+*.js       text
+
+# Configuration and documentation
+*.json     text
+*.xml      text
+*.yaml     text
+*.yml      text
+*.md       text
+
+# Scripts
+*.sh       text eol=lf
+*.bash     text eol=lf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+# Binary files
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.ico      binary
+*.pdf      binary
+*.zip      binary
+*.7z       binary
