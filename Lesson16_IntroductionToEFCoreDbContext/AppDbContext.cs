@@ -11,6 +11,11 @@ namespace Lesson16_IntroductionToEFCoreDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
+            var dbPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "..", "..", "..", "app.db");
+            dbPath = Path.GetFullPath(dbPath);
+            options.UseSqlite($"Data Source={dbPath}");
             
         }
 
