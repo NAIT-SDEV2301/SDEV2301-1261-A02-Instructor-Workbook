@@ -1,4 +1,5 @@
 using Lesson16_IntroductionToEFCoreDbContext;
+using Microsoft.EntityFrameworkCore.Storage;
 
 using var context = new AppDbContext();
 context.Database.EnsureCreated();
@@ -12,4 +13,7 @@ if (!context.Products.Any())
         new Product { Name = "Mouse", Price = 24.99m },
         new Product { Name = "Monitor", Price = 219.99m }
         );
+
+    var rowsSaved = context.SaveChanges();
+    Console.WriteLine($"{rowsSaved} rows saved.");
 }
