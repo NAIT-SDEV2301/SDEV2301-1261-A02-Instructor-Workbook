@@ -16,7 +16,7 @@ namespace PersonDomain
             // if (firstName == "")
             if (string.IsNullOrWhiteSpace(firstName))
             {
-                throw new ArgumentNullException(nameof(firstName), "First Name cannot be blank.");
+                throw new ArgumentException("First Name cannot be blank.");
             }
             FirstName = firstName.Trim();
             LastName = lastName.Trim();
