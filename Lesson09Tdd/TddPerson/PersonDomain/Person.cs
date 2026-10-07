@@ -13,6 +13,11 @@ namespace PersonDomain
 
         public Person(string firstName, string lastName, string? preferredName = null)
         {
+            // if (firstName == "")
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentNullException(nameof(firstName), "First Name cannot be blank.");
+            }
             FirstName = firstName.Trim();
             LastName = lastName.Trim();
             PreferredName = preferredName?.Trim();
