@@ -1,0 +1,83 @@
+@page "/products"
+@layout ProductLayout
+
+<PageTitle>Products</PageTitle>
+<h3>Products</h3>
+
+<p>There are @ProductList.Count products.</p>
+<p>Last refreshed: @DateTime.Now.ToLongDateString()</p>
+
+<div class="mb-3">
+    <label class="form-label" for="productName">New product name</label>
+    <input id="productName" class="form-control"
+        @bind="NewProductName" />
+</div>
+
+<p>Preview: @NewProductName</p>
+
+<button class="btn btn-primary" @onclick="AddProduct">
+    Add Sample Product
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in ProductList)
+        {
+            <tr>
+                <td>@product.Sku</td>
+                <td>@product.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.IsActive</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    private string NewProductName { get; set; } = string.Empty;
+
+    private List<Product> ProductList =
+        [
+            new() { Id = 1, Sku="KEY-100",Name="Keyboard", Price=49.99m, IsActive=true},
+            new() { Id = 2, Sku="MOU-200",Name="Mouse", Price=24.99m, IsActive=true},
+    ];
+
+    private void AddProduct()
+    {
+        if (string.IsNullOrWhiteSpace(NewProductName))
+        {
+            return;
+        }
+
+        var nextNumber = ProductList.Count + 1;
+        ProductList.Add(new Product
+        {
+            Id = nextNumber,
+            Sku = $"NEW-{nextNumber:000}",
+            //Name = $"New Product {nextNumber}",
+            Name = NewProductName.Trim(),
+            Price = Random.Shared.Next(1,100),
+            IsActive = true
+        });
+
+        NewProductName = string.Empty;
+    }
+
+    private class Product
+    {
+        public int Id { get; set; }
+        public string Sku { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public bool IsActive { get; set; }
+    }
+}
