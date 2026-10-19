@@ -61,8 +61,10 @@
                  Price="@product.Price"
                  IsActive="@product.IsActive" /> *@
 
-    <ProductCard Item="@product"
+    <ProductCard
+        Item="@product"
         OnSelected="HandleProductSelected"
+        OnRemove="HandleProductRemoved"
         />
 
 }
@@ -102,6 +104,16 @@
     private void HandleProductSelected(Product product)
     {
         _selectedProduct = product;
+    }
+
+    private void HandleProductRemoved(Product product)
+    {
+        _products.Remove(product);
+
+        if (_selectedProduct == product)
+        {
+            _selectedProduct = null;
+        }
     }
 
     // private class Product
