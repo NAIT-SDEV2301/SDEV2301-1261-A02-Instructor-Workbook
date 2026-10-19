@@ -1,11 +1,12 @@
 @page "/products"
 @layout ProductLayout
+@using Sdev2301.BlazorIntro.Models
 
 <PageTitle>Products</PageTitle>
 <h3>Products</h3>
 
-<p>There are @ProductList.Count products.</p>
-<p>Last refreshed: @DateTime.Now.ToLongDateString()</p>
+<p>There are @_products.Count products.</p>
+<p>Last refreshed: @DateTime.Now.ToLongTimeString()</p>
 
 <div class="mb-3">
     <label class="form-label" for="productName">New product name</label>
@@ -29,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var product in ProductList)
+        @foreach (var product in _products)
         {
             <tr>
                 <td>@product.Sku</td>
@@ -45,7 +46,7 @@
 @code {
     private string NewProductName { get; set; } = string.Empty;
 
-    private List<Product> ProductList =
+    private List<Product> _products =
         [
             new() { Id = 1, Sku="KEY-100",Name="Keyboard", Price=49.99m, IsActive=true},
             new() { Id = 2, Sku="MOU-200",Name="Mouse", Price=24.99m, IsActive=true},
@@ -58,8 +59,8 @@
             return;
         }
 
-        var nextNumber = ProductList.Count + 1;
-        ProductList.Add(new Product
+        var nextNumber = _products.Count + 1;
+        _products.Add(new Product
         {
             Id = nextNumber,
             Sku = $"NEW-{nextNumber:000}",
@@ -72,12 +73,12 @@
         NewProductName = string.Empty;
     }
 
-    private class Product
-    {
-        public int Id { get; set; }
-        public string Sku { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public decimal Price { get; set; }
-        public bool IsActive { get; set; }
-    }
+    // private class Product
+    // {
+    //     public int Id { get; set; }
+    //     public string Sku { get; set; } = string.Empty;
+    //     public string Name { get; set; } = string.Empty;
+    //     public decimal Price { get; set; }
+    //     public bool IsActive { get; set; }
+    // }
 }
