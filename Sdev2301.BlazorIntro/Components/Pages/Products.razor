@@ -49,10 +49,12 @@
 
 @foreach (var product in _products)
 {
-    <ProductCard Sku="@product.Sku"
+    @* <ProductCard Sku="@product.Sku"
                  Name="@product.Name"
                  Price="@product.Price"
-                 IsActive="@product.IsActive" />
+                 IsActive="@product.IsActive" /> *@
+    <ProductCard Item="@product" />
+
 }
 
 @code {
