@@ -1,0 +1,20 @@
+<div class="card p-3 mb-3">
+    <h4>@Name</h4>
+    <p class="mb-1"><strong>SKU:</strong> @Sku</p>
+    <p class="mb-1"><strong>Price:</strong> @Price.ToString("C")</p>
+    <p class="mb-0"><strong>Status:</strong> @(IsActive ? "Active" : "Inactive")</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Sku { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Name { get; set; } = string.Empty;
+
+    [Parameter]
+    public decimal Price { get; set; }
+
+    [Parameter]
+    public bool IsActive { get; set; }
+}
