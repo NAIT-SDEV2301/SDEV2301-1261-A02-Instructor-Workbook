@@ -47,13 +47,23 @@
     </tbody>
 </table> *@
 
+@if (_selectedProduct is not null)
+{
+    <div class="alert alert-info">
+        Selected: @_selectedProduct.Name
+    </div>
+}
+
 @foreach (var product in _products)
 {
     @* <ProductCard Sku="@product.Sku"
                  Name="@product.Name"
                  Price="@product.Price"
                  IsActive="@product.IsActive" /> *@
-    <ProductCard Item="@product" />
+
+    <ProductCard Item="@product"
+        OnSelected="HandleProductSelected"
+        />
 
 }
 
@@ -85,6 +95,13 @@
         });
 
         NewProductName = string.Empty;
+    }
+
+    private Product? _selectedProduct;
+
+    private void HandleProductSelected(Product product)
+    {
+        _selectedProduct = product;
     }
 
     // private class Product
