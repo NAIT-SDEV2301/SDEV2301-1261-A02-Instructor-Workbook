@@ -2,13 +2,29 @@
 
 <PageTitle>Form Demo</PageTitle>
 
-<h1>Form Demo</h1>
+<PageTitle>Product Form</PageTitle>
 
-<label class="form-label" for="name">Product name</label>
-<input id="name" class="form-control" @bind="_name" @bind:event="oninput"/>
+<h1>Product Form</h1>
 
-<p class="mt-3">Current value: @_name</p>
+<EditForm Model="_model">
+    <div class="mb-3">
+        <label class="form-label">SKU</label>
+        <InputText class="form-control" @bind-Value="_model.Sku" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="_model.Name" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <InputNumber class="form-control" @bind-Value="_model.Price" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
 
 @code {
-    private string _name = string.Empty;
+    private ProductFormModel _model = new();
 }
