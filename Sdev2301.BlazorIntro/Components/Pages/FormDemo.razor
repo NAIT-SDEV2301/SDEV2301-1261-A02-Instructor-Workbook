@@ -6,7 +6,14 @@
 
 <h1>Product Form</h1>
 
-<EditForm Model="_model">
+@if (!string.IsNullOrWhiteSpace(_statusMessage))
+{
+    <div class="alert alert-success">
+        @_statusMessage
+    </div>
+}
+
+<EditForm Model="_model" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -45,4 +52,11 @@
 
 @code {
     private ProductFormModel _model = new();
+
+    private string _statusMessage = string.Empty;
+
+    private void HandleValidSubmit()
+    {
+        _statusMessage = $"Saved {_model.Name}.";
+    }
 }
