@@ -13,6 +13,35 @@
     </div>
 }
 
+@if (_submittedProducts.Count == 0)
+{
+    <p>No products submitted yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _submittedProducts)
+            {
+                <tr>
+                    <td>@product.Sku</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@(product.IsActive ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 <EditForm Model="_model" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -51,12 +80,24 @@
 </EditForm>
 
 @code {
+    private readonly List<Product> _submittedProducts = [];
+
     private ProductFormModel _model = new();
 
     private string _statusMessage = string.Empty;
 
     private void HandleValidSubmit()
     {
-        _statusMessage = $"Saved {_model.Name}.";
+        var product = new Product
+        {
+            Id = _submittedProducts.Count + 1,
+            Sku = _model.Sku,
+            Name = _model.Name,
+            Price = _model.Price,
+            IsActive = _model.IsActive
+        };
+
+        _submittedProducts.Add(product);
+        _statusMessage = $"Added {product.Name}.";
     }
 }
