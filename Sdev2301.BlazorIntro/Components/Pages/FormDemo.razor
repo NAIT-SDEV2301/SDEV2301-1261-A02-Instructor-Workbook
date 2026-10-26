@@ -7,24 +7,30 @@
 <h1>Product Form</h1>
 
 <EditForm Model="_model">
+    <DataAnnotationsValidator />
+
     <div class="mb-3">
         <label class="form-label">SKU</label>
         <InputText class="form-control" @bind-Value="_model.Sku" />
+        <ValidationMessage For="@(() => _model.Sku)" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Name</label>
         <InputText class="form-control" @bind-Value="_model.Name" />
+        <ValidationMessage For="@(() => _model.Name)" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Price</label>
         <InputNumber class="form-control" @bind-Value="_model.Price" />
+        <ValidationMessage For="@(() => _model.Price)" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Stock Quantity</label>
         <InputNumber class="form-control" @bind-Value="_model.StockQuantity" />
+        <ValidationMessage For="@(() => _model.StockQuantity)" />
     </div>
 
     <div class="form-check mb-3">
