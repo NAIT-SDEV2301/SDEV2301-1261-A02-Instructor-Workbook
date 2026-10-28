@@ -9,6 +9,9 @@ builder.Services.AddRazorComponents()
 
 // Register the ProductDisplayService
 builder.Services.AddScoped<ProductDisplayService>();
+builder.Services.AddSingleton<SingletonMarker>();
+builder.Services.AddScoped<ScopedMarker>();
+builder.Services.AddTransient<TransientMarker>();
 
 var app = builder.Build();
 
