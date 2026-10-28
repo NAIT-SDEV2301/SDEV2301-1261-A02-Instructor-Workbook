@@ -1,10 +1,14 @@
 using Sdev2301.BlazorIntro.Components;
+using Sdev2301.BlazorIntro.Services; // ProductDisplayService
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Register the ProductDisplayService
+builder.Services.AddScoped<ProductDisplayService>();
 
 var app = builder.Build();
 
