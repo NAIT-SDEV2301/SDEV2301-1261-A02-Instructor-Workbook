@@ -1,4 +1,5 @@
 @page "/form-demo"
+@inject ProductService ProductService
 
 <PageTitle>Form Demo</PageTitle>
 
@@ -80,26 +81,30 @@ else
 </EditForm>
 
 @code {
-    private readonly List<Product> _submittedProducts = [];
+    private List<Product> _submittedProducts = [];
 
     private ProductFormModel _model = new();
 
     private string _statusMessage = string.Empty;
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
         var product = new Product
         {
-            Id = _submittedProducts.Count + 1,
+            // Id = _submittedProducts.Count + 1,
             Sku = _model.Sku,
             Name = _model.Name,
             Price = _model.Price,
             IsActive = _model.IsActive
         };
 
-        _submittedProducts.Add(product);
+        // _submittedProducts.Add(product);
+        await ProductService.AddAsync(product);
+
         _statusMessage = $"Added {product.Name}.";
 
         _model = new ProductFormModel();
+
+        _submittedProducts = await ProductService.GetAllAsync();
     }
 }
