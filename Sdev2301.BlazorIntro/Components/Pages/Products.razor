@@ -2,6 +2,7 @@
 @* @layout ProductLayout *@
 @* @using Sdev2301.BlazorIntro.Models *@
 @inject ProductDisplayService ProductDisplayService
+@inject ProductService ProductService
 
 <PageTitle>Products</PageTitle>
 <h3>Products</h3>
@@ -79,11 +80,22 @@
 @code {
     private string NewProductName { get; set; } = string.Empty;
 
-    private List<Product> _products =
-        [
-            new() { Id = 1, Sku="KEY-100",Name="Keyboard", Price=49.99m, IsActive=true},
-            new() { Id = 2, Sku="MOU-200",Name="Mouse", Price=24.99m, IsActive=true},
-    ];
+    // private List<Product> _products =
+    //     [
+    //         new() { Id = 1, Sku="KEY-100",Name="Keyboard", Price=49.99m, IsActive=true},
+    //         new() { Id = 2, Sku="MOU-200",Name="Mouse", Price=24.99m, IsActive=true},
+    // ];
+    private List<Product> _products = [];
+
+    private async Task LoadProductsAsync()
+    {
+        _products = await ProductService.GetAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProductsAsync();
+    }
 
     private void AddProduct()
     {

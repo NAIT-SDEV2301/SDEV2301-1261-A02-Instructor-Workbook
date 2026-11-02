@@ -23,7 +23,7 @@ builder.Services.AddDbContextFactory<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
-//builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 
